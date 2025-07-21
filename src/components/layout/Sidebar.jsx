@@ -44,8 +44,8 @@ export const Sidebar = ({ children }) => {
           ${expanded ? "w-52 ml-3" : "w-0"}`}
           >
             <div className="leading-4">
-              <h4 className="font-semibold">John Doe</h4>
-              <span className="text-xs text-gray-600">sobaka@gmail.com</span>
+              <h4 className="font-semibold">Різа Селямієв</h4>
+              <span className="text-xs text-gray-600">riza.seliamiyev@viti.edu.ua</span>
             </div>
             <FiMoreVertical size={20} />
           </div>
