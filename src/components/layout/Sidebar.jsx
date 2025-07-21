@@ -1,4 +1,5 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
+import axios from "axios";
 import logo from "../../assets/logoipsum-382.svg";
 import { LuChevronFirst, LuChevronLast } from "react-icons/lu";
 import { CgMoreVertical } from "react-icons/cg";
@@ -7,6 +8,14 @@ import { FiMoreVertical } from "react-icons/fi";
 const SidebarContext = createContext();
 export const Sidebar = ({ children }) => {
   const [expanded, setExpanded] = useState(true);
+  const [user, setUser] = useState({ name: "", email: "" });
+
+  useEffect( () => {
+    axios.get("/api/user") //  !!!
+      .then(res => setUser({name: res.data.name, email: res.data.email}))
+      .catch(err => console.error("Помилка при отриманні користувача: " + err));
+  })
+
   return (
     <aside className="h-screen flex">
       <nav className="h-full flex flex-col bg-white border-r border-r-gray-200 shadow-sm">
@@ -44,8 +53,10 @@ export const Sidebar = ({ children }) => {
           ${expanded ? "w-52 ml-3" : "w-0"}`}
           >
             <div className="leading-4">
-              <h4 className="font-semibold">Різа Селямієв</h4>
-              <span className="text-xs text-gray-600">riza.seliamiyev@viti.edu.ua</span>
+              <h4 className="font-semibold">{user.name || "Default User"}</h4>
+              <span className="text-xs text-gray-600">
+                {user.email || "default@viti.edu.ua"}
+              </span>
             </div>
             <FiMoreVertical size={20} />
           </div>
@@ -84,11 +95,13 @@ export function SidebarItem({ icon, text, active, alert }) {
       )}
 
       {!expanded && (
-        <div className={`absolute left-full rounded-md px-2 py-1 ml-6
+        <div
+          className={`absolute left-full rounded-md px-2 py-1 ml-6
         bg-indigo-100 text-indigo-800 text-sm
         invisible opacity-20 -translate-x-3 transition-all
-        group-hover:visible group-hover:opacity-100 group-hover:translate-x-0`}>
-            {text}
+        group-hover:visible group-hover:opacity-100 group-hover:translate-x-0`}
+        >
+          {text}
         </div>
       )}
     </li>
