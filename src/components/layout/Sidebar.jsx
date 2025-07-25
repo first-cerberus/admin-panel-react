@@ -9,7 +9,7 @@ const SidebarContext = createContext();
 export const Sidebar = ({ children }) => {
   const [expanded, setExpanded] = useState(true);
   const [user, setUser] = useState({ name: "", email: "" });
-
+  
   useEffect( () => {
     axios.get("/api/user") //  !!!
       .then(res => setUser({name: res.data.name, email: res.data.email}))
@@ -23,7 +23,7 @@ export const Sidebar = ({ children }) => {
           <img
             src={logo}
             className={`overflow-hidden transition-all ${
-              expanded ? "w-32" : "w-0"
+              expanded ? "w-45" : "w-0"
             }`}
             alt="logo"
           />
