@@ -6,15 +6,19 @@ import { CgMoreVertical } from "react-icons/cg";
 import { FiMoreVertical } from "react-icons/fi";
 
 const SidebarContext = createContext();
+
 export const Sidebar = ({ children }) => {
   const [expanded, setExpanded] = useState(true);
   const [user, setUser] = useState({ name: "", email: "" });
-  
-  useEffect( () => {
-    axios.get("/api/user") //  !!!
-      .then(res => setUser({name: res.data.name, email: res.data.email}))
-      .catch(err => console.error("Помилка при отриманні користувача: " + err));
-  })
+
+  useEffect(() => {
+    axios
+      .get("/api/user") //  !!!
+      .then((res) => setUser({ name: res.data.name, email: res.data.email }))
+      .catch((err) =>
+        console.error("Помилка при отриманні користувача: " + err)
+      );
+  }, []);
 
   return (
     <aside className="h-screen flex">
@@ -66,17 +70,18 @@ export const Sidebar = ({ children }) => {
   );
 };
 
-export function SidebarItem({ icon, text, active, alert }) {
+export function SidebarItem({ icon, text, active, alert, onClick }) {
   const { expanded } = useContext(SidebarContext);
   return (
     <li
+      onClick={onClick}
       className={`relative flex items-center py-2 px-3 my-1 
-    font-medium rounded-md cursor-pointer transition-colors group
-  ${
-    active
-      ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800"
-      : "hover:bg-indigo-50 text-gray-600"
-  }`}
+        font-medium rounded-md cursor-pointer transition-colors group
+        ${
+          active
+            ? "bg-gray-100 text-gray-800"
+            : "hover:bg-indigo-50 text-gray-600"
+        }`}
     >
       {icon}
       <span
