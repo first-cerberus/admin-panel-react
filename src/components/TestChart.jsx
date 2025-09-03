@@ -13,10 +13,10 @@ const data = [
 
 function TestChart() {
   return (
-    <ResponsiveContainer width="100%" height={300}>
+    <ResponsiveContainer width="89%" height={300}>
       <LineChart
         data={data}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
       >
         <CartesianGrid strokeDasharray="3 3" /> {/* Сітка */}
         <XAxis dataKey="name" /> {/* Вісь X, використовуємо 'name' з даних */}
