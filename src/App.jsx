@@ -88,7 +88,7 @@ function App() {
           onClick={() => setActivePage("Допомога")}
         />
       </Sidebar>
-      <div className="flex-1 p-6 bg-gray-50 overflow-auto">
+      <div className="flex-1 p-14 pl-25 bg-gray-50 overflow-auto">
         {pageComponents[activePage]}
       </div>
     </div>
